@@ -21,14 +21,16 @@ while attempts <= max_attempts:
     status_code = response.status_code
 
     if 200<= status_code <300:
-    #validating that data is in a json format
-        data = response.json()
-
-        #open is basically used to interact with the filename variable, with -w to mean write
-        with open(filename, 'w') as file:
-            #^aliasing the function to write in the file, as 'file'
-            json.dump(data, file)
+        try:
+            #validating that data is in a json format
+            data = response.json()
+            #open is basically used to interact with the filename variable, with -w to mean write
+            with open(filename, 'w') as file:
+                #^aliasing the function to write in the file, as 'file'
+                json.dump(data, file)
             print(f'great success!🥳🙌 file has been saved as "{filename}"')
+        except Exception as e:
+            print(f'yikes! 😬 error occured when saving the json: {e}')
         break
 
     elif 300< status_code <500:
