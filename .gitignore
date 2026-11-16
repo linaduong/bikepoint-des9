@@ -5,6 +5,7 @@ __pycache__/
 *.py[codz]
 *$py.class
 /data
+test-load-code.py
 
 # C extensions
 *.so
