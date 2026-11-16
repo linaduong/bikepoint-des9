@@ -66,7 +66,7 @@ while attempts <= max_attempts:
         else:
             print(f'attempt {attempts}/{max_attempts} failed, status code {status_code}, will retry 🫡')
             logger.error(f'attempt {attempts}/{max_attempts} failed, status code {status_code}, will retry')
-        attempt+=1
+        attempts+=1
         time.sleep(30)
 
 #print(data)
