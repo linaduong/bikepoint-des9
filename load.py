@@ -11,7 +11,7 @@ timestamp = datetime.now().strftime('%Y-%m-%d')
 
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
-log_filename = f'{log_dir}/{timestamp}.log'
+log_filename = f'{log_dir}/load/{timestamp}.log'
 
 #don't have to write on separate lines, but makes it easier to read
 logging.basicConfig(
@@ -39,6 +39,7 @@ s3_client = boto3.client(
     aws_access_key_id = AWS_ACCESS_KEY,
     aws_secret_access_key = AWS_SECRET_KEY
 )
+logger.info('connection to s3 successful')
 
 for file in file_location:
     to_upload = f'{data_dir}/{file}'
@@ -46,6 +47,9 @@ for file in file_location:
         #function, location name, name of the file to be uploaded
         s3_client.upload_file(to_upload, AWS_BUCKET, file)
         print(f'file {file} successfully uploaded! 🥳')
+        logger.info(f'file {to_upload} was successfully uploaded')
         os.remove(to_upload)
+        logger.info(f'file {to_upload} was deleted locally')
     except Exception as e:
         print(f'something went wrong 🫪, error {e}')
+        logger.error(f'something went wrong, error {e}')

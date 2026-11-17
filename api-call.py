@@ -6,10 +6,11 @@ from datetime import datetime
 import requests
 
 timestamp = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+logtimestamp = datetime.now().strftime('%Y-%m-%d')
 
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
-log_filename = f'{log_dir}/{timestamp}.log'
+log_filename = f'{log_dir}{logtimestamp}.log'
 
 #don't have to write on separate lines, but makes it easier to read
 logging.basicConfig(
@@ -34,6 +35,7 @@ url ='https://api.tfl.gov.uk/BikePoint/'
 
 attempts = 1
 max_attempts = 3
+delay = 30
 
 while attempts <= max_attempts:
     response = requests.get(url)
@@ -67,6 +69,5 @@ while attempts <= max_attempts:
             print(f'attempt {attempts}/{max_attempts} failed, status code {status_code}, will retry 🫡')
             logger.error(f'attempt {attempts}/{max_attempts} failed, status code {status_code}, will retry')
         attempts+=1
-        time.sleep(30)
+        time.sleep(delay)
 
-#print(data)
