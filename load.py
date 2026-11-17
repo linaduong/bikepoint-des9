@@ -1,10 +1,30 @@
 import os
 import json
 import logging
+from datetime import datetime
 from dotenv import load_dotenv
 import boto3
 
 load_dotenv()
+
+timestamp = datetime.now().strftime('%Y-%m-%d')
+
+log_dir = 'logs'
+os.makedirs(log_dir, exist_ok=True)
+log_filename = f'{log_dir}/{timestamp}.log'
+
+#don't have to write on separate lines, but makes it easier to read
+logging.basicConfig(
+    filename = log_filename,
+    #don't question the format - time - severity of the message - the actual message
+    format = '%(asctime)s - %(levelname)s - %(message)s',
+    #ignore anything that's below INFO
+    level = logging.INFO
+)
+
+logger = logging.getLogger()
+#logger.info can be found across all print statements, to log the outcome into the historic log
+logger.info('logger was successfully initialised')
 
 AWS_ACCESS_KEY=os.getenv('AWS_ACCESS_KEY')
 AWS_SECRET_KEY=os.getenv('AWS_SECRET_KEY')
