@@ -11,7 +11,7 @@ timestamp = datetime.now().strftime('%Y-%m-%d')
 
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
-log_filename = f'{log_dir}/load/{timestamp}.log'
+log_filename = f'{log_dir}{timestamp}.log'
 
 #don't have to write on separate lines, but makes it easier to read
 logging.basicConfig(

@@ -28,6 +28,7 @@ def extract_to_json(url:str, data_dir: str, timestamp: str, max_attempts: int, d
 
     while attempts <= max_attempts:
         response = requests.get(url)
+        logger.info(f'calling api, {attempts}/{max_attempts} attempts made')
         status_code = response.status_code
 
         if 200<= status_code <300:
