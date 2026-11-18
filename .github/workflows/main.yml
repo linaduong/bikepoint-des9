@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v7 #can find the code for 'actions' in yaml, like a py package
+        with:
+          ref: main
 
       - name: setup python
         uses: actions/setup-python@v7
