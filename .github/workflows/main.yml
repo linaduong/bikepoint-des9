@@ -21,6 +21,9 @@ jobs:
       - name: install packages
         run: pip install -r requirements.txt
 
+      - name: install boto3
+        run: pip install boto3
+
       - name: run script
         env:
           AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
