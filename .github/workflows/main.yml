@@ -1,0 +1,30 @@
+name: bike point ingestion #giving the task a name
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch: #means we can also manually run it
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #the hardware that it's running on
+    environment: bike point des9
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v7 #can find the code for 'actions' in yaml, like a py package
+
+      - name: setup python
+        uses: actions/setup-python@v7
+        with:
+          python-version: 3.12
+
+      - name: install packages
+        run: pip install -r requirements.txt
+
+      - name: run script
+        env:
+          AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
+          AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
+          AWS_BUCKET: ${{secrets.AWS_BUCKET}}
+        run: python main.py
+        
