@@ -3,7 +3,7 @@ import os
 
 def logging_setup(log_dir:str, timestamp: str):
     os.makedirs(log_dir, exist_ok=True)
-    log_timestamp = timestamp.strftime('%Y-%m-%d')
+    #log_timestamp = timestamp.strftime('%Y-%m-%d')
     log_filename = f'{log_dir}/{timestamp}.log'
 
     #don't have to write on separate lines, but makes it easier to read
